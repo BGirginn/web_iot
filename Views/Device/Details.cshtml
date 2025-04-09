@@ -1,0 +1,226 @@
+@model WebIot.Models.Device
+
+@{
+    ViewData["Title"] = $"Device - {Model.Name}";
+}
+
+<div class="container">
+    <div class="row mb-4">
+        <div class="col">
+            <h1>@Model.Name</h1>
+            <p class="text-muted">@Model.Description</p>
+        </div>
+        <div class="col text-end">
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back to List
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Device Info Card -->
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Device Information</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        <strong>Port:</strong> @Model.PortName<br>
+                        <strong>Baud Rate:</strong> @Model.BaudRate<br>
+                        <strong>Type:</strong> @Model.DeviceType<br>
+                        <strong>Status:</strong>
+                        <span class="badge @(Model.IsActive ? "bg-success" : "bg-danger")" id="deviceStatus">
+                            @(Model.IsActive ? "Active" : "Inactive")
+                        </span>
+                    </p>
+                    <div class="btn-group w-100" role="group">
+                        <button class="btn btn-success connect-btn" data-id="@Model.Id">
+                            <i class="fas fa-plug"></i> Connect
+                        </button>
+                        <button class="btn btn-danger disconnect-btn" data-id="@Model.Id" style="display: none;">
+                            <i class="fas fa-plug"></i> Disconnect
+                        </button>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">
+                        Last connected: <span id="lastConnected">@(Model.LastConnectedAt?.ToString("g") ?? "Never")</span>
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Real-time Data Card -->
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Real-time Data</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="dataChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Control Panel -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Control Panel</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">LED Control</label>
+                                <div class="btn-group w-100" role="group">
+                                    <button class="btn btn-success" onclick="sendCommand(@Model.Id, 'LED_ON')">
+                                        <i class="fas fa-lightbulb"></i> ON
+                                    </button>
+                                    <button class="btn btn-danger" onclick="sendCommand(@Model.Id, 'LED_OFF')">
+                                        <i class="far fa-lightbulb"></i> OFF
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Custom Command</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="customCommand" placeholder="Enter command">
+                                    <button class="btn btn-primary" onclick="sendCustomCommand(@Model.Id)">
+                                        <i class="fas fa-paper-plane"></i> Send
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Data Log -->
+                    <div class="mt-4">
+                        <h6>Data Log</h6>
+                        <div class="border rounded p-2" style="height: 200px; overflow-y: auto;">
+                            <pre id="dataLog" class="mb-0"></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        let chart;
+        let dataPoints = [];
+        const maxDataPoints = 50;
+
+        $(document).ready(function () {
+            // Initialize Chart
+            const ctx = document.getElementById('dataChart').getContext('2d');
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Sensor Data',
+                        data: [],
+                        borderColor: 'rgb(75, 192, 192)',
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Initialize SignalR
+            const connection = new signalR.HubConnectionBuilder()
+                .withUrl("/deviceHub")
+                .build();
+
+            connection.on("ReceiveDeviceData", function (deviceId, data) {
+                if (deviceId === @Model.Id) {
+                    updateChart(data);
+                    updateDataLog(data);
+                }
+            });
+
+            connection.on("ReceiveDeviceStatus", function (deviceId, isConnected) {
+                if (deviceId === @Model.Id) {
+                    updateDeviceStatus(isConnected);
+                }
+            });
+
+            connection.start().catch(function (err) {
+                return console.error(err.toString());
+            });
+
+            // Poll for device data
+            setInterval(function() {
+                if ($('#deviceStatus').hasClass('bg-success')) {
+                    pollDeviceData(@Model.Id);
+                }
+            }, 1000);
+        });
+
+        function updateChart(data) {
+            const timestamp = new Date().toLocaleTimeString();
+            const value = parseFloat(data);
+
+            dataPoints.push({ x: timestamp, y: value });
+            if (dataPoints.length > maxDataPoints) {
+                dataPoints.shift();
+            }
+
+            chart.data.labels = dataPoints.map(point => point.x);
+            chart.data.datasets[0].data = dataPoints.map(point => point.y);
+            chart.update();
+        }
+
+        function updateDataLog(data) {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = `[${timestamp}] ${data}\n`;
+            const dataLog = $('#dataLog');
+            dataLog.prepend(logEntry);
+        }
+
+        function updateDeviceStatus(isConnected) {
+            const statusBadge = $('#deviceStatus');
+            const connectBtn = $('.connect-btn');
+            const disconnectBtn = $('.disconnect-btn');
+            
+            if (isConnected) {
+                statusBadge.removeClass('bg-danger').addClass('bg-success').text('Active');
+                connectBtn.hide();
+                disconnectBtn.show();
+            } else {
+                statusBadge.removeClass('bg-success').addClass('bg-danger').text('Inactive');
+                connectBtn.show();
+                disconnectBtn.hide();
+            }
+        }
+
+        function pollDeviceData(deviceId) {
+            $.get(`/api/DeviceApi/${deviceId}/data`, function(response) {
+                if (response.data) {
+                    updateChart(response.data);
+                    updateDataLog(response.data);
+                }
+            });
+        }
+
+        function sendCustomCommand(deviceId) {
+            const command = $('#customCommand').val();
+            if (command) {
+                sendCommand(deviceId, command);
+                $('#customCommand').val('');
+            }
+        }
+    </script>
+} 

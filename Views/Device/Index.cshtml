@@ -1,0 +1,111 @@
+@model IEnumerable<WebIot.Models.Device>
+
+@{
+    ViewData["Title"] = "Devices";
+}
+
+<div class="container">
+    <div class="row mb-4">
+        <div class="col">
+            <h1>Devices</h1>
+        </div>
+        <div class="col text-end">
+            <a asp-action="Create" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Add New Device
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">@item.Name</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <strong>Port:</strong> @item.PortName<br>
+                            <strong>Baud Rate:</strong> @item.BaudRate<br>
+                            <strong>Type:</strong> @item.DeviceType<br>
+                            <strong>Status:</strong> 
+                            <span class="badge @(item.IsActive ? "bg-success" : "bg-danger")">
+                                @(item.IsActive ? "Active" : "Inactive")
+                            </span>
+                        </p>
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-success connect-btn" data-id="@item.Id">
+                                <i class="fas fa-plug"></i> Connect
+                            </button>
+                            <button class="btn btn-danger disconnect-btn" data-id="@item.Id" style="display: none;">
+                                <i class="fas fa-plug"></i> Disconnect
+                            </button>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">
+                                <i class="fas fa-trash"></i> Delete
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">
+                            Last connected: @(item.LastConnectedAt?.ToString("g") ?? "Never")
+                        </small>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/lib/signalr/dist/browser/signalr.js"></script>
+    <script>
+        $(document).ready(function () {
+            const connection = new signalR.HubConnectionBuilder()
+                .withUrl("/deviceHub")
+                .build();
+
+            connection.on("ReceiveDeviceStatus", function (deviceId, isConnected) {
+                const connectBtn = $(`.connect-btn[data-id="${deviceId}"]`);
+                const disconnectBtn = $(`.disconnect-btn[data-id="${deviceId}"]`);
+                
+                if (isConnected) {
+                    connectBtn.hide();
+                    disconnectBtn.show();
+                } else {
+                    connectBtn.show();
+                    disconnectBtn.hide();
+                }
+            });
+
+            connection.start().catch(function (err) {
+                return console.error(err.toString());
+            });
+
+            $('.connect-btn').click(function () {
+                const deviceId = $(this).data('id');
+                $.post(`/Device/Connect/${deviceId}`, function (response) {
+                    if (response.success) {
+                        toastr.success('Device connected successfully');
+                    } else {
+                        toastr.error('Failed to connect to device');
+                    }
+                });
+            });
+
+            $('.disconnect-btn').click(function () {
+                const deviceId = $(this).data('id');
+                $.post(`/Device/Disconnect/${deviceId}`, function (response) {
+                    if (response.success) {
+                        toastr.success('Device disconnected successfully');
+                    } else {
+                        toastr.error('Failed to disconnect from device');
+                    }
+                });
+            });
+        });
+    </script>
+} 

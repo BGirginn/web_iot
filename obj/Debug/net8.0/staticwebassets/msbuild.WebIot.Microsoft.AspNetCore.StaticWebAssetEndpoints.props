@@ -1,0 +1,28 @@
+﻿<Project>
+  <ItemGroup>
+    <StaticWebAssetEndpoint Include="_content/WebIot/css/site.8l3chvfw26.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"8l3chvfw26"},{"Name":"integrity","Value":"sha256-LBrKcbDhwPQ3NjNb2c/F4X7NjJRtYPIOldlBoweiYNE="},{"Name":"label","Value":"_content/WebIot/css/site.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1134"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022LBrKcbDhwPQ3NjNb2c/F4X7NjJRtYPIOldlBoweiYNE=\u0022"},{"Name":"Last-Modified","Value":"Tue, 08 Apr 2025 15:21:54 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/WebIot/css/site.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-LBrKcbDhwPQ3NjNb2c/F4X7NjJRtYPIOldlBoweiYNE="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1134"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022LBrKcbDhwPQ3NjNb2c/F4X7NjJRtYPIOldlBoweiYNE=\u0022"},{"Name":"Last-Modified","Value":"Tue, 08 Apr 2025 15:21:54 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/WebIot/js/site.js">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\site.js'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-VWKle/1q9Y0LlyOSqHm6st9xx\u002BpqLN9aggA/hCZogqk="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"2506"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022VWKle/1q9Y0LlyOSqHm6st9xx\u002BpqLN9aggA/hCZogqk=\u0022"},{"Name":"Last-Modified","Value":"Tue, 08 Apr 2025 15:22:07 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/WebIot/js/site.lgw4lke043.js">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\site.js'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"lgw4lke043"},{"Name":"integrity","Value":"sha256-VWKle/1q9Y0LlyOSqHm6st9xx\u002BpqLN9aggA/hCZogqk="},{"Name":"label","Value":"_content/WebIot/js/site.js"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"2506"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022VWKle/1q9Y0LlyOSqHm6st9xx\u002BpqLN9aggA/hCZogqk=\u0022"},{"Name":"Last-Modified","Value":"Tue, 08 Apr 2025 15:22:07 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+  </ItemGroup>
+</Project>
