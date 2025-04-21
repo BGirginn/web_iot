@@ -1,0 +1,28 @@
+[
+  {
+    "ContainingType": "Web_IoT.Controllers.DeviceController",
+    "Method": "GetDevices",
+    "RelativePath": "api/Device",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_IoT.Controllers.DeviceController",
+    "Method": "AddDevice",
+    "RelativePath": "api/Device",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "device",
+        "Type": "Web_IoT.Models.Device",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
