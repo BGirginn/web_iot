@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("web_iot")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e4640b0048f116252e3a0ff0ba14843a13bdf021")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+675f0497f033fb4fc9bdc0991c17038b054ff422")]
 [assembly: System.Reflection.AssemblyProductAttribute("web_iot")]
 [assembly: System.Reflection.AssemblyTitleAttribute("web_iot")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
