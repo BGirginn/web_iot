@@ -5,12 +5,20 @@
       "PackagePath": "staticwebassets\\web_iot.ztc76nmfqr.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\borae\\Desktop\\web_iot\\base-model\\web_iot\\wwwroot\\css\\dark-theme.css",
+      "PackagePath": "staticwebassets\\css\\dark-theme.css"
+    },
+    {
       "Id": "C:\\Users\\borae\\Desktop\\web_iot\\base-model\\web_iot\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
       "Id": "C:\\Users\\borae\\Desktop\\web_iot\\base-model\\web_iot\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\borae\\Desktop\\web_iot\\base-model\\web_iot\\wwwroot\\js\\authSwitch.js",
+      "PackagePath": "staticwebassets\\js\\authSwitch.js"
     },
     {
       "Id": "C:\\Users\\borae\\Desktop\\web_iot\\base-model\\web_iot\\wwwroot\\js\\deviceDetect.js",

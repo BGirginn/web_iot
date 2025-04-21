@@ -1,5 +1,7 @@
+wwwroot\css\dark-theme.css
 wwwroot\css\site.css
 wwwroot\favicon.ico
+wwwroot\js\authSwitch.js
 wwwroot\js\deviceDetect.js
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap.css

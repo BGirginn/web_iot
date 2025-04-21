@@ -11,10 +11,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("web_iot")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+675f0497f033fb4fc9bdc0991c17038b054ff422")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+20687122b25613a0024f4f227766ab3cd0b29aaa")]
 [assembly: System.Reflection.AssemblyProductAttribute("web_iot")]
 [assembly: System.Reflection.AssemblyTitleAttribute("web_iot")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

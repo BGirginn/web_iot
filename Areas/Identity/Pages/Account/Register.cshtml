@@ -1,0 +1,86 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Kayıt Ol";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-center mb-4">Yeni Hesap Oluştur</h2>
+            <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.FirstName" class="form-control" placeholder="Adınız" />
+                    <label asp-for="Input.FirstName">Ad</label>
+                    <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.LastName" class="form-control" placeholder="Soyadınız" />
+                    <label asp-for="Input.LastName">Soyad</label>
+                    <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Country" class="form-control" placeholder="Ülkeniz" />
+                    <label asp-for="Input.Country">Ülke</label>
+                    <span asp-validation-for="Input.Country" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" placeholder="E-posta adresiniz" />
+                    <label asp-for="Input.Email">E-posta</label>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Password" class="form-control" id="PasswordInput" autocomplete="new-password" placeholder="Şifre oluşturun" />
+                    <label asp-for="Input.Password">Şifre</label>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+
+                    <ul id="password-criteria" class="list-unstyled small mt-2 text-start">
+                        <li id="length" class="text-danger">En az 6 karakter</li>
+                        <li id="uppercase" class="text-danger">En az 1 büyük harf</li>
+                        <li id="lowercase" class="text-danger">En az 1 küçük harf</li>
+                        <li id="number" class="text-danger">En az 1 rakam</li>
+                        <li id="symbol" class="text-danger">En az 1 özel karakter</li>
+                    </ul>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" placeholder="Şifreyi tekrar girin" />
+                    <label asp-for="Input.ConfirmPassword">Şifre Tekrar</label>
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                </div>
+
+                <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-outline-primary mt-3">Kayıt Ol</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        const passwordInput = document.getElementById("PasswordInput");
+        const criteria = {
+            length: document.getElementById("length"),
+            uppercase: document.getElementById("uppercase"),
+            lowercase: document.getElementById("lowercase"),
+            number: document.getElementById("number"),
+            symbol: document.getElementById("symbol")
+        };
+
+        passwordInput.addEventListener("input", () => {
+            const val = passwordInput.value;
+            criteria.length.className = val.length >= 6 ? "text-success" : "text-danger";
+            criteria.uppercase.className = /[A-Z]/.test(val) ? "text-success" : "text-danger";
+            criteria.lowercase.className = /[a-z]/.test(val) ? "text-success" : "text-danger";
+            criteria.number.className = /[0-9]/.test(val) ? "text-success" : "text-danger";
+            criteria.symbol.className = /[^A-Za-z0-9]/.test(val) ? "text-success" : "text-danger";
+        });
+    </script>
+}

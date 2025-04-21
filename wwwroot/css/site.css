@@ -1,22 +1,175 @@
-html {
-  font-size: 14px;
+﻿/* === Genel Sayfa Düzeni === */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden; /* Sayfa kaydırmasın */
+    background-color: #2e2e2e; /* Gri‑antrasit arası */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-@media (min-width: 768px) {
-  html {
+/* === Ana Bölme Yapısı === */
+.fullpage-container {
+    display: flex;
+    height: 100vh;
+    position: relative;
+    justify-content: flex-start; /* sola hizala */
+    align-items: flex-start; /* yukarı hizala */
+    padding-top: 60px; /* üstten boşluk */
+    padding-left: 60px; /* soldan boşluk */
+}
+
+/* Sol panel (Login) */
+.left-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* Sağ panel (boş) */
+.right-side {
+    flex: 1;
+}
+
+/* Orta çizgi */
+.middle-line {
+    position: absolute;
+    left: 50%;
+    top: 5%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 90%; /* daha uzun */
+    background-color: #bbbbbb;
+    opacity: 0.5;
+}
+
+/* Login panel içi */
+.login-panel {
+    max-width: 360px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Başlık ve alt metin */
+.login-title {
+    font-size: 28px;
+    margin-bottom: 8px;
+    color: #f0f0f0;
+}
+
+.login-subtext {
     font-size: 16px;
-  }
+    color: #cccccc;
+    margin-bottom: 30px;
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+/* Form alanları (floating değil de sade input) */
+.custom-input {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px 14px;
+    background-color: #444;
+    border: 1px solid #666;
+    border-radius: 5px;
+    color: #fff;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+    .custom-input::placeholder {
+        color: #aaa;
+    }
+
+/* Giriş butonu */
+.btn-login {
+    width: 100%;
+    padding: 10px;
+    background-color: #3ac569; /* login aktif rengi */
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 20px;
+    transition: background-color 0.3s;
 }
 
-body {
-  margin-bottom: 60px;
+    .btn-login:hover {
+        background-color: #32b75e;
+    }
+
+/* Tek toggle buton (Login/Register) */
+.login-toggle-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 25px 0;
+}
+
+.login-toggle {
+    display: flex;
+    width: 280px;
+    height: 45px;
+    border-radius: 30px;
+    overflow: hidden;
+    border: 2px solid #777;
+    background-color: #444;
+    transition: background-color 0.3s ease;
+}
+
+    .login-toggle .section {
+        flex: 1;
+        text-align: center;
+        line-height: 45px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 16px;
+        color: #ccc;
+        transition: all 0.3s ease;
+    }
+        /* Login seçiliyken */
+        .login-toggle .section.login.active {
+            background-color: #3ac569;
+            color: white;
+        }
+        /* Register seçiliyken */
+        .login-toggle .section.register.active {
+            background-color: #3a86ff;
+            color: white;
+        }
+
+/* Sosyal login butonları */
+.social-login {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.divider-text {
+    text-align: center;
+    margin: 10px 0;
+    color: #aaa;
+    font-size: 14px;
+}
+
+.btn-google,
+.btn-apple {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #888;
+    border-radius: 5px;
+    background-color: #555;
+    color: #fff;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-google:hover,
+    .btn-apple:hover {
+        background-color: #666;
+    }
+
+/* Footer alt çizgisi kaldırıldı */
+footer.border-top {
+    display: none !important;
 }

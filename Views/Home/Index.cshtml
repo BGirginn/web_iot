@@ -1,14 +1,39 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Giriş";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="fullpage-container">
+    <div class="left-side">
+        <div class="login-panel">
 
-    <button id="detectBtn" class="btn btn-primary" style="margin-top: 20px;">Cihazı Tespit Et</button>
-    <p id="result" style="margin-top:10px;">Cihaz bekleniyor...</p>
+            <h2 class="login-title">Hoş Geldiniz</h2>
+            <p class="login-subtext">Lütfen giriş yapın</p>
+
+            <form method="post">
+                <input type="email" placeholder="E-posta" class="form-control custom-input" required />
+                <input type="password" placeholder="Şifre" class="form-control custom-input" required />
+                <button type="submit" class="btn btn-login">Giriş Yap</button>
+            </form>
+
+            <!-- 🔁 Login/Register Geçiş Butonu -->
+            <div class="toggle-auth-buttons">
+                <button class="btn switch-btn active">Giriş</button>
+                <button class="btn switch-btn">Kayıt</button>
+            </div>
+
+            <!-- 🔐 Login With Bölümü -->
+            <div class="social-login">
+                <p class="divider-text">veya</p>
+                <button class="btn btn-google">Google ile Giriş</button>
+                <button class="btn btn-apple">Apple ile Giriş</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="middle-line"></div>
+
+    <div class="right-side">
+        <!-- Şimdilik boş -->
+    </div>
 </div>
-
-<!-- JS dosyasını bu sayfaya bağla -->
-<script src="~/js/deviceDetect.js"></script>

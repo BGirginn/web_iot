@@ -1,13 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Web_IoT.Models;
 
 namespace Web_IoT.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<AppUser>
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+        public AppDbContext(DbContextOptions<AppDbContext> options)
+            : base(options)
+        {
+        }
 
-        public DbSet<Device> Devices { get; set; }
-        public DbSet<Measurement> Measurements { get; set; }
+        public DbSet<Device> Devices { get; set; } = null!;
+        public DbSet<Measurement> Measurements { get; set; } = null!;
     }
 }
