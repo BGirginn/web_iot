@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "kt84G9Kuu/WRjg6L/DJqg/4tNDPynRJY2KVpyZbKT9E=",
+  "Hash": "c2qMaZvLgJFC+gDSnN46bdeSi+6NiF38Wk3peozqjuU=",
   "Source": "web_iot",
   "BasePath": "_content/web_iot",
   "Mode": "Default",
@@ -1354,8 +1354,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "3762yx13tn",
-      "Integrity": "IR7VSgmbNyC0T482XsF5/0gdpJT/wICT2qapjEHYvVg=",
+      "Fingerprint": "o36w6ahgku",
+      "Integrity": "5CSLzEnE5ElWLROdIHmBOsz0lzjn9i3DeN/M8q4vqpA=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
@@ -2726,51 +2726,6 @@
       ]
     },
     {
-      "Route": "css/site.3762yx13tn.css",
-      "AssetFile": "C:\\Users\\borae\\Desktop\\web_iot\\base-model\\web_iot\\wwwroot\\css\\site.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "3693"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"IR7VSgmbNyC0T482XsF5/0gdpJT/wICT2qapjEHYvVg=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Mon, 21 Apr 2025 13:42:00 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "3762yx13tn"
-        },
-        {
-          "Name": "label",
-          "Value": "css/site.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-IR7VSgmbNyC0T482XsF5/0gdpJT/wICT2qapjEHYvVg="
-        }
-      ]
-    },
-    {
       "Route": "css/site.css",
       "AssetFile": "C:\\Users\\borae\\Desktop\\web_iot\\base-model\\web_iot\\wwwroot\\css\\site.css",
       "Selectors": [],
@@ -2781,7 +2736,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "3693"
+          "Value": "3707"
         },
         {
           "Name": "Content-Type",
@@ -2789,11 +2744,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"IR7VSgmbNyC0T482XsF5/0gdpJT/wICT2qapjEHYvVg=\""
+          "Value": "\"5CSLzEnE5ElWLROdIHmBOsz0lzjn9i3DeN/M8q4vqpA=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 21 Apr 2025 13:42:00 GMT"
+          "Value": "Tue, 22 Apr 2025 09:49:37 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2803,7 +2758,52 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-IR7VSgmbNyC0T482XsF5/0gdpJT/wICT2qapjEHYvVg="
+          "Value": "sha256-5CSLzEnE5ElWLROdIHmBOsz0lzjn9i3DeN/M8q4vqpA="
+        }
+      ]
+    },
+    {
+      "Route": "css/site.o36w6ahgku.css",
+      "AssetFile": "C:\\Users\\borae\\Desktop\\web_iot\\base-model\\web_iot\\wwwroot\\css\\site.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3707"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"5CSLzEnE5ElWLROdIHmBOsz0lzjn9i3DeN/M8q4vqpA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 22 Apr 2025 09:49:37 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "o36w6ahgku"
+        },
+        {
+          "Name": "label",
+          "Value": "css/site.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-5CSLzEnE5ElWLROdIHmBOsz0lzjn9i3DeN/M8q4vqpA="
         }
       ]
     },

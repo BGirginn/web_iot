@@ -126,14 +126,16 @@ body, html {
         color: #ccc;
         transition: all 0.3s ease;
     }
+
         /* Login seçiliyken */
         .login-toggle .section.login.active {
             background-color: #3ac569;
             color: white;
         }
-        /* Register seçiliyken */
+
+        /* Register seçiliyken (turuncu) */
         .login-toggle .section.register.active {
-            background-color: #3a86ff;
+            background-color: #e67e22;
             color: white;
         }
 
