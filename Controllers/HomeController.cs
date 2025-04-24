@@ -1,32 +1,37 @@
-using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using web_iot.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 
-namespace web_iot.Controllers
+namespace Web_IoT.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
+        // Landing (Ana Sayfa)
         public IActionResult Index()
         {
             return View();
         }
 
+        // Gizlilik Politikası (mevcut)
         public IActionResult Privacy()
         {
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        // Sık Sorulan Sorular
+        public IActionResult Faq()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
+        }
+
+        // Hakkımızda
+        public IActionResult About()
+        {
+            return View();
+        }
+
+        // Fiyatlandırma
+        public IActionResult Pricing()
+        {
+            return View();
         }
     }
 }

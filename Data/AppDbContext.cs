@@ -11,7 +11,7 @@ namespace Web_IoT.Data
         {
         }
 
-        public DbSet<Device> Devices { get; set; } = null!;
-        public DbSet<Measurement> Measurements { get; set; } = null!;
+        public DbSet<Device> Devices { get; set; }
+        public DbSet<DeviceCode> DeviceCodes { get; set; }
     }
 }

@@ -4,83 +4,164 @@
     ViewData["Title"] = "Kayıt Ol";
 }
 
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <h2 class="text-center mb-4">Yeni Hesap Oluştur</h2>
-            <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+<style>
+    /* Aynı fullpage-layout stili */
+    .fullpage-container {
+        display: flex;
+        height: 100vh;
+        position: relative;
+        padding: 60px;
+        box-sizing: border-box;
+        background-color: #2e2e2e;
+        overflow: hidden;
+    }
 
-                <div class="form-floating mb-3">
-                    <input asp-for="Input.FirstName" class="form-control" placeholder="Adınız" />
-                    <label asp-for="Input.FirstName">Ad</label>
-                    <span asp-validation-for="Input.FirstName" class="text-danger"></span>
-                </div>
+    .left-side {
+        flex: 1;
+    }
 
-                <div class="form-floating mb-3">
-                    <input asp-for="Input.LastName" class="form-control" placeholder="Soyadınız" />
-                    <label asp-for="Input.LastName">Soyad</label>
-                    <span asp-validation-for="Input.LastName" class="text-danger"></span>
-                </div>
+    .right-side {
+        flex: 2;
+        padding-left: 40px;
+    }
 
-                <div class="form-floating mb-3">
-                    <input asp-for="Input.Country" class="form-control" placeholder="Ülkeniz" />
-                    <label asp-for="Input.Country">Ülke</label>
-                    <span asp-validation-for="Input.Country" class="text-danger"></span>
-                </div>
+    .middle-line {
+        position: absolute;
+        left: 50%;
+        top: 5%;
+        transform: translateX(-50%);
+        width: 2px;
+        height: 90%;
+        background: #bbbbbb;
+        opacity: 0.5;
+    }
 
-                <div class="form-floating mb-3">
-                    <input asp-for="Input.Email" class="form-control" autocomplete="username" placeholder="E-posta adresiniz" />
-                    <label asp-for="Input.Email">E-posta</label>
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
-                </div>
+    /* Panel */
+    .panel {
+        max-width: 360px;
+        color: #f0f0f0;
+        display: flex;
+        flex-direction: column;
+    }
 
-                <div class="form-floating mb-3">
-                    <input asp-for="Input.Password" class="form-control" id="PasswordInput" autocomplete="new-password" placeholder="Şifre oluşturun" />
-                    <label asp-for="Input.Password">Şifre</label>
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+        .panel h2 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
 
-                    <ul id="password-criteria" class="list-unstyled small mt-2 text-start">
-                        <li id="length" class="text-danger">En az 6 karakter</li>
-                        <li id="uppercase" class="text-danger">En az 1 büyük harf</li>
-                        <li id="lowercase" class="text-danger">En az 1 küçük harf</li>
-                        <li id="number" class="text-danger">En az 1 rakam</li>
-                        <li id="symbol" class="text-danger">En az 1 özel karakter</li>
-                    </ul>
-                </div>
+        /* Input */
+        .panel form input {
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #444;
+            border: 1px solid #666;
+            border-radius: 5px;
+            color: #fff;
+        }
 
-                <div class="form-floating mb-3">
-                    <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" placeholder="Şifreyi tekrar girin" />
-                    <label asp-for="Input.ConfirmPassword">Şifre Tekrar</label>
-                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-                </div>
+            .panel form input::placeholder {
+                color: #aaa;
+            }
 
-                <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-outline-primary mt-3">Kayıt Ol</button>
+    /* Şifre kriterleri */
+    #password-criteria {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 20px;
+    }
+
+        #password-criteria li {
+            font-size: .9rem;
+            color: #d33;
+        }
+
+            #password-criteria li.text-success {
+                color: #3ac569;
+            }
+
+    /* Kayıt butonu */
+    .btn-login {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        background: #e67e22; /* turuncu kayıt rengi */
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        font-weight: bold;
+        transition: background-color .3s;
+        cursor: pointer;
+    }
+
+        .btn-login:hover {
+            background: #cf6b1b;
+        }
+</style>
+
+<div class="fullpage-container">
+
+    <!-- Kayıt Paneli -->
+    <div class="left-side">
+        <div class="panel">
+            <h2>Kayıt Ol</h2>
+            <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+                <input asp-for="Input.FirstName" placeholder="Ad" required />
+                <input asp-for="Input.LastName" placeholder="Soyad" required />
+                <input asp-for="Input.Email" placeholder="E‑posta" required />
+
+                <input asp-for="Input.Password"
+                       id="PasswordInput"
+                       type="password"
+                       placeholder="Şifre"
+                       required />
+
+                <ul id="password-criteria">
+                    <li id="length">En az 6 karakter</li>
+                    <li id="uppercase">En az 1 büyük harf</li>
+                    <li id="lowercase">En az 1 küçük harf</li>
+                    <li id="number">En az 1 rakam</li>
+                    <li id="symbol">En az 1 özel karakter</li>
+                </ul>
+
+                <input asp-for="Input.ConfirmPassword" placeholder="Şifre Tekrar" required />
+
+                <button type="submit" class="btn-login">Kayıt Ol</button>
+                <partial name="_ValidationScriptsPartial" />
             </form>
         </div>
     </div>
+
+    <!-- Orta İnce Çizgi -->
+    <div class="middle-line"></div>
+
+    <!-- Sağ tarafta boş alan -->
+    <div class="right-side"></div>
+
 </div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-
     <script>
-        const passwordInput = document.getElementById("PasswordInput");
-        const criteria = {
-            length: document.getElementById("length"),
+        document.addEventListener("DOMContentLoaded", () => {
+          // Canlı şifre kriter kontrolü
+          const pw = document.getElementById("PasswordInput");
+          const criteria = {
+            length:    document.getElementById("length"),
             uppercase: document.getElementById("uppercase"),
             lowercase: document.getElementById("lowercase"),
-            number: document.getElementById("number"),
-            symbol: document.getElementById("symbol")
-        };
-
-        passwordInput.addEventListener("input", () => {
-            const val = passwordInput.value;
-            criteria.length.className = val.length >= 6 ? "text-success" : "text-danger";
-            criteria.uppercase.className = /[A-Z]/.test(val) ? "text-success" : "text-danger";
-            criteria.lowercase.className = /[a-z]/.test(val) ? "text-success" : "text-danger";
-            criteria.number.className = /[0-9]/.test(val) ? "text-success" : "text-danger";
-            criteria.symbol.className = /[^A-Za-z0-9]/.test(val) ? "text-success" : "text-danger";
+            number:    document.getElementById("number"),
+            symbol:    document.getElementById("symbol")
+          };
+          pw.addEventListener("input", () => {
+            const v = pw.value;
+            criteria.length.className    = v.length >= 6        ? "text-success" : "";
+            criteria.uppercase.className = /[A-Z]/.test(v)     ? "text-success" : "";
+            criteria.lowercase.className = /[a-z]/.test(v)     ? "text-success" : "";
+            criteria.number.className    = /[0-9]/.test(v)     ? "text-success" : "";
+            criteria.symbol.className    = /[^A-Za-z0-9]/.test(v)? "text-success" : "";
+          });
         });
     </script>
 }

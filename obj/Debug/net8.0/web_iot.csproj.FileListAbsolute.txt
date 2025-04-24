@@ -263,4 +263,3 @@ C:\Users\borae\Desktop\web_iot\base-model\web_iot\bin\Debug\net8.0\runtimes\win\
 C:\Users\borae\Desktop\web_iot\base-model\web_iot\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll
 C:\Users\borae\Desktop\web_iot\base-model\web_iot\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\borae\Desktop\web_iot\base-model\web_iot\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
-C:\Users\borae\Desktop\web_iot\base-model\web_iot\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

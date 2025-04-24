@@ -1,39 +1,44 @@
 ﻿@{
-    ViewData["Title"] = "Giriş";
+    ViewData["Title"] = "Ana Sayfa";
 }
 
-<div class="fullpage-container">
-    <div class="left-side">
-        <div class="login-panel">
+<style>
+    /* Hero bölümü */
+    .hero {
+        height: calc(100vh - 56px); /* navbar yüksekliğini çıkar */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #333; /* koyu gri ton */
+        color: #fff;
+        text-align: center;
+        padding: 0 20px;
+    }
 
-            <h2 class="login-title">Hoş Geldiniz</h2>
-            <p class="login-subtext">Lütfen giriş yapın</p>
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
 
-            <form method="post">
-                <input type="email" placeholder="E-posta" class="form-control custom-input" required />
-                <input type="password" placeholder="Şifre" class="form-control custom-input" required />
-                <button type="submit" class="btn btn-login">Giriş Yap</button>
-            </form>
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
 
-            <!-- 🔁 Login/Register Geçiş Butonu -->
-            <div class="toggle-auth-buttons">
-                <button class="btn switch-btn active">Giriş</button>
-                <button class="btn switch-btn">Kayıt</button>
-            </div>
+        .hero .btn-cta {
+            font-size: 1.125rem;
+            padding: 0.75rem 1.75rem;
+            margin: 0 0.5rem;
+        }
+</style>
 
-            <!-- 🔐 Login With Bölümü -->
-            <div class="social-login">
-                <p class="divider-text">veya</p>
-                <button class="btn btn-google">Google ile Giriş</button>
-                <button class="btn btn-apple">Apple ile Giriş</button>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="middle-line"></div>
-
-    <div class="right-side">
-        <!-- Şimdilik boş -->
+<div class="hero">
+    <h1>Web IoT Platformuna Hoş Geldiniz</h1>
+    <p>Gerçek zamanlı veri takibi, cihaz yönetimi ve analitikler — hepsi tek bir merkezden.</p>
+    <div>
+        <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-primary btn-cta">Giriş Yap / Kayıt Ol</a>
+        <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-outline-light btn-cta">Ücretsiz Başlayın</a>
     </div>
 </div>
