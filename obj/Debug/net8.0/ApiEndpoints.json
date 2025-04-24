@@ -14,5 +14,26 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_IoT.Controllers.CodeController",
+    "Method": "UpdateCode",
+    "RelativePath": "api/Code/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "model",
+        "Type": "Web_IoT.Controllers.CodeController\u002BCodeUpdateModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

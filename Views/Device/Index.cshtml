@@ -1,55 +1,20 @@
-﻿@model List<Web_IoT.Models.Device>
+﻿<script>
+    let selectedCodeId = null;
 
-<div style="display: flex;">
-    <!-- Sol Panel: Cihaz ve Kod Listesi -->
-    <div style="width: 30%; padding: 10px; border-right: 1px solid #444;">
-        @foreach (var device in Model)
-        {
-            <div style="margin-bottom: 15px;">
-                <strong>@device.DeviceName (@device.DeviceType)</strong>
-                <ul style="margin-left: 15px;">
-                    @if (device.Codes != null && device.Codes.Any())
-                    {
-                        foreach (var code in device.Codes)
-                        {
-                            <li>
-                                <a href="#" class="code-link" data-code-id="@code.Id">@code.Title</a>
-                            </li>
-                        }
-                    }
-                    else
-                    {
-                        <li><em>Kod yok</em></li>
-                    }
-                </ul>
-            </div>
-        }
-    </div>
-
-    <!-- Orta Panel: Kod İçeriği -->
-    <div style="width: 70%; padding: 10px;">
-        <h3 id="code-title">Kod Başlığı</h3>
-        <p><strong>Dil:</strong> <span id="code-lang">-</span></p>
-        <textarea id="code-content" style="width: 100%; height: 400px;" readonly></textarea>
-    </div>
-</div>
-
-<script>
     document.querySelectorAll('.code-link').forEach(link => {
         link.addEventListener('click', function (e) {
             e.preventDefault();
             const codeId = this.dataset.codeId;
+            selectedCodeId = codeId;
 
             fetch(`/api/code/${codeId}`)
                 .then(response => {
-                    if (!response.ok) {
-                        throw new Error("Kod bulunamadı.");
-                    }
+                    if (!response.ok) throw new Error("Kod bulunamadı.");
                     return response.json();
                 })
                 .then(data => {
                     document.getElementById("code-title").textContent = data.title;
-                    document.getElementById("code-lang").textContent = data.language;
+                    document.getElementById("language-select").value = data.language;
                     document.getElementById("code-content").value = data.content;
                 })
                 .catch(err => {
@@ -57,4 +22,57 @@
                 });
         });
     });
+
+    function saveCode() {
+        const updatedContent = document.getElementById("code-content").value;
+        const updatedLanguage = document.getElementById("language-select").value;
+
+        if (!selectedCodeId) {
+            // ✅ Yeni kod kaydı
+            const title = prompt("Bu koda bir isim ver (örnek: Blink, SensorOku):");
+            if (!title) return alert("İsim verilmediği için kaydedilemedi.");
+
+            const deviceId = prompt("Bu kod hangi cihaza ait? (Cihaz ID'si gir)") // Geçici yöntem
+
+            fetch("/api/code", {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    title: title,
+                    content: updatedContent,
+                    language: updatedLanguage,
+                    deviceId: deviceId
+                })
+            })
+            .then(res => {
+                if (!res.ok) throw new Error("Yeni kod oluşturulamadı.");
+                alert("Yeni kod oluşturuldu.");
+                location.reload(); // Kod listesi yenilensin
+            })
+            .catch(err => alert(err.message));
+
+            return;
+        }
+
+        // ✅ Mevcut kod güncellemesi
+        fetch(`/api/code/${selectedCodeId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                content: updatedContent,
+                language: updatedLanguage
+            })
+        })
+        .then(res => {
+            if (!res.ok) throw new Error("Kod kaydedilemedi.");
+            alert("Kod başarıyla güncellendi.");
+        })
+        .catch(err => alert(err.message));
+    }
+
+    function uploadCode() {
+        const content = document.getElementById("code-content").value;
+        alert("Cihaza gönderilecek kod:\n\n" + content);
+        // 📌 Web Serial API buraya entegre edilecek
+    }
 </script>

@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Web_IoT.Data;
+using Web_IoT.Models;
 
 namespace Web_IoT.Controllers
 {
-    // [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CodeController : ControllerBase
@@ -21,17 +20,35 @@ namespace Web_IoT.Controllers
         public async Task<IActionResult> GetCode(int id)
         {
             var code = await _context.DeviceCodes.FindAsync(id);
-
             if (code == null)
                 return NotFound();
 
             return Ok(new
             {
-                code.Id,
-                code.Title,
-                code.Language,
-                code.Content
+                title = code.Title,
+                language = code.Language,
+                content = code.Content
             });
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateCode(int id, [FromBody] CodeUpdateModel model)
+        {
+            var code = await _context.DeviceCodes.FindAsync(id);
+            if (code == null)
+                return NotFound();
+
+            code.Content = model.Content;
+            code.Language = model.Language;
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        public class CodeUpdateModel
+        {
+            public string Content { get; set; }
+            public string Language { get; set; }
         }
     }
 }
