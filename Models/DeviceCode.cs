@@ -9,15 +9,14 @@ namespace Web_IoT.Models
         public int Id { get; set; }
 
         [Required]
-        public string Title { get; set; } = "";
+        public string Title { get; set; } = string.Empty;
 
         [Required]
-        public string CodeContent { get; set; } = "";
+        public string Content { get; set; } = string.Empty; // önceki CodeContent buydu
 
         [Required]
-        public string Language { get; set; } = ""; // Örn: c, cpp, py, js
+        public string Language { get; set; } = string.Empty; // Örn: c, cpp, py, js
 
-        // Hangi cihaza ait
         [Required]
         public int DeviceId { get; set; }
 

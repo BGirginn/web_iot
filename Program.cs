@@ -5,12 +5,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using System.Globalization;
 using Web_IoT.Data;
-using Web_IoT.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,13 +49,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer("Server=BGIRGIN\\SQLEXPRESS;Database=WebIoTDB;Trusted_Connection=True;TrustServerCertificate=True;"));
 // --- /EF Core ---
 
-// --- ASP.NET Core Identity ---
-builder.Services.AddDefaultIdentity<AppUser>(options =>
-{
-    options.SignIn.RequireConfirmedAccount = true;
-})
-    .AddEntityFrameworkStores<AppDbContext>();
-// --- /Identity ---
+// Identity tamamen kaldırıldı
+// builder.Services.AddDefaultIdentity<AppUser>(...) satırı silindi
 
 var app = builder.Build();
 
@@ -77,8 +70,9 @@ if (app.Environment.IsDevelopment())
 app.UseStaticFiles();
 app.UseRouting();
 
-app.UseAuthentication();
-app.UseAuthorization();
+// Kimlik doğrulama kapatıldı
+// app.UseAuthentication();
+// app.UseAuthorization();
 
 // --- Routing ---
 app.MapControllerRoute(

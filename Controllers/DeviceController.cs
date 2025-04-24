@@ -1,14 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Web_IoT.Data;
 using Web_IoT.Models;
-using System.Threading.Tasks;
 
 namespace Web_IoT.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class DeviceController : ControllerBase
+    // [Authorize]
+    public class DeviceController : Controller
     {
         private readonly AppDbContext _context;
 
@@ -17,18 +16,21 @@ namespace Web_IoT.Controllers
             _context = context;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetDevices()
+        public async Task<IActionResult> Index()
         {
-            return Ok(await _context.Devices.ToListAsync());
-        }
+            // Giriş yapan kullanıcının ID'si
+            var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
 
-        [HttpPost]
-        public async Task<IActionResult> AddDevice([FromBody] Device device)
-        {
-            _context.Devices.Add(device);
-            await _context.SaveChangesAsync();
-            return Ok(device);
+            if (userId == null)
+                return Unauthorized(); // Kullanıcı yoksa erişim engellenir
+
+            // Bu kullanıcıya ait cihazları ve içindeki kodları çek
+            var devices = await _context.Devices
+                .Include(d => d.Codes)
+                .Where(d => d.UserId == userId)
+                .ToListAsync();
+
+            return View(devices);
         }
     }
 }

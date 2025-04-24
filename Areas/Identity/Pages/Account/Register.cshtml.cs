@@ -48,31 +48,27 @@ namespace web_iot.Areas.Identity.Pages.Account
         {
             [Required(ErrorMessage = "İsim zorunludur.")]
             [Display(Name = "İsim")]
-            public string FirstName { get; set; }
+            public string FirstName { get; set; } = string.Empty;
 
             [Required(ErrorMessage = "Soyisim zorunludur.")]
             [Display(Name = "Soyisim")]
-            public string LastName { get; set; }
-
-            [Required(ErrorMessage = "Ülke seçimi zorunludur.")]
-            [Display(Name = "Ülke")]
-            public string Country { get; set; }
+            public string LastName { get; set; } = string.Empty;
 
             [Required(ErrorMessage = "Email alanı zorunludur.")]
             [EmailAddress(ErrorMessage = "Geçerli bir email adresi giriniz.")]
             [Display(Name = "Email")]
-            public string Email { get; set; }
+            public string Email { get; set; } = string.Empty;
 
             [Required(ErrorMessage = "Şifre zorunludur.")]
             [StringLength(100, ErrorMessage = "{0} en az {2}, en fazla {1} karakter olmalıdır.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Şifre")]
-            public string Password { get; set; }
+            public string Password { get; set; } = string.Empty;
 
             [DataType(DataType.Password)]
             [Display(Name = "Şifre Tekrar")]
             [Compare("Password", ErrorMessage = "Şifreler eşleşmiyor.")]
-            public string ConfirmPassword { get; set; }
+            public string ConfirmPassword { get; set; } = string.Empty;
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -95,10 +91,9 @@ namespace web_iot.Areas.Identity.Pages.Account
 
                 user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
-                user.Country = Input.Country;
+                user.Country = ""; // ✅ BOŞ DEĞER ATANIYOR → DB artık NULL hatası vermez
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
-
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("Yeni kullanıcı hesabı oluşturuldu.");

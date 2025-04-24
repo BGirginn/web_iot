@@ -5,7 +5,7 @@
 // Example tasks:
 
 sql connection and base template
-detect button and pop-up
++ detect button and pop-up
 user and password
 page system on top
 -- detect,sss,subs,main page,old codes and chats
@@ -13,3 +13,4 @@ code pannel
 more device for detecttion maybe with api
 old chats
 sensor table and codes
+login and register page

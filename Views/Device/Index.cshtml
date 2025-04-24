@@ -1,0 +1,60 @@
+﻿@model List<Web_IoT.Models.Device>
+
+<div style="display: flex;">
+    <!-- Sol Panel: Cihaz ve Kod Listesi -->
+    <div style="width: 30%; padding: 10px; border-right: 1px solid #444;">
+        @foreach (var device in Model)
+        {
+            <div style="margin-bottom: 15px;">
+                <strong>@device.DeviceName (@device.DeviceType)</strong>
+                <ul style="margin-left: 15px;">
+                    @if (device.Codes != null && device.Codes.Any())
+                    {
+                        foreach (var code in device.Codes)
+                        {
+                            <li>
+                                <a href="#" class="code-link" data-code-id="@code.Id">@code.Title</a>
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        <li><em>Kod yok</em></li>
+                    }
+                </ul>
+            </div>
+        }
+    </div>
+
+    <!-- Orta Panel: Kod İçeriği -->
+    <div style="width: 70%; padding: 10px;">
+        <h3 id="code-title">Kod Başlığı</h3>
+        <p><strong>Dil:</strong> <span id="code-lang">-</span></p>
+        <textarea id="code-content" style="width: 100%; height: 400px;" readonly></textarea>
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll('.code-link').forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            const codeId = this.dataset.codeId;
+
+            fetch(`/api/code/${codeId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Kod bulunamadı.");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    document.getElementById("code-title").textContent = data.title;
+                    document.getElementById("code-lang").textContent = data.language;
+                    document.getElementById("code-content").value = data.content;
+                })
+                .catch(err => {
+                    alert("Kod yüklenemedi: " + err.message);
+                });
+        });
+    });
+</script>

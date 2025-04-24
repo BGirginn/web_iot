@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Web_IoT.Models
@@ -9,24 +10,23 @@ namespace Web_IoT.Models
         public int Id { get; set; }
 
         [Required]
-        public string DeviceName { get; set; } = "";
+        public string DeviceName { get; set; } = string.Empty;
 
         [Required]
-        public string DeviceType { get; set; } = ""; // ESP32, RPi, vb.
+        public string DeviceType { get; set; } = string.Empty;
 
         public string? VendorId { get; set; }
         public string? ProductId { get; set; }
-
         public string? FirmwareVersion { get; set; }
 
-        // İlişki: Kullanıcı
+        // Kullanıcı ile ilişki
         [Required]
-        public string UserId { get; set; }
+        public string UserId { get; set; } = string.Empty; // Identity FK
 
         [ForeignKey("UserId")]
-        public AppUser User { get; set; } = null!;
+        public ApplicationUser? User { get; set; }
 
-        // Kodlar
-        public ICollection<DeviceCode> Codes { get; set; } = new List<DeviceCode>();
+        // Cihaza ait kodlar
+        public ICollection<DeviceCode>? Codes { get; set; }
     }
 }
