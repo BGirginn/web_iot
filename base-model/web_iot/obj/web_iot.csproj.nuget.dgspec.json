@@ -1,32 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\borae\\Desktop\\web_iot\\base-model\\web_iot\\web_iot.csproj": {}
+    "/home/runner/work/web_iot/web_iot/base-model/web_iot/web_iot.csproj": {}
   },
   "projects": {
-    "C:\\Users\\borae\\Desktop\\web_iot\\base-model\\web_iot\\web_iot.csproj": {
+    "/home/runner/work/web_iot/web_iot/base-model/web_iot/web_iot.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\borae\\Desktop\\web_iot\\base-model\\web_iot\\web_iot.csproj",
+        "projectUniqueName": "/home/runner/work/web_iot/web_iot/base-model/web_iot/web_iot.csproj",
         "projectName": "web_iot",
-        "projectPath": "C:\\Users\\borae\\Desktop\\web_iot\\base-model\\web_iot\\web_iot.csproj",
-        "packagesPath": "C:\\Users\\borae\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\borae\\Desktop\\web_iot\\base-model\\web_iot\\obj\\",
+        "projectPath": "/home/runner/work/web_iot/web_iot/base-model/web_iot/web_iot.csproj",
+        "packagesPath": "/home/runner/.nuget/packages/",
+        "outputPath": "/home/runner/work/web_iot/web_iot/base-model/web_iot/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "D:\\VisualStudio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\borae\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/home/runner/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -39,13 +32,7 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.200"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -103,7 +90,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.117/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
